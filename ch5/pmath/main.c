@@ -16,5 +16,9 @@ int main(int argc, int *argv[]) {
     }
     printf("%d\n", *pa+1); // this prints 2???
     printf("%d\n", *(pa+1)); // this prints 69??
+
+    for (int i = 0; i < argc - 1; i++) {
+        printf("%p\n", *(argv+i));
+    }
     return 0;
 }
