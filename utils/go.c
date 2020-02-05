@@ -36,12 +36,12 @@ typedef struct go_goroutine_future{
 
 
 struct go_goroutine_future *new_go_goroutine_future() {
-    char *returnValue;
+    char *returnValue = malloc(sizeof(char));
     int exitCode;
     pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
     exitCode = 1;
     struct go_goroutine_future *fut = malloc(sizeof(go_goroutine_future));
-    (*fut).returnValue = *returnValue;
+    (*fut).returnValue = returnValue;
     (*fut).exitCode = exitCode;
     (*fut).mutex = mutex;
     return fut;
