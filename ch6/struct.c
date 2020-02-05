@@ -43,6 +43,10 @@ int main() {
     printf("func init\tx: %d\ty: %d\n", funcpt.x, funcpt.y);
     printf("combined\tx: %d\ty: %d\n", combined.x, combined.y);
     printf("combined pointer address: %p\n", *combinedp);
-    printf("%s", npt.pt1);
+    // parentheses are necessary beause the precended of the `.` operator is higher than the `*`
+    printf("combined: %d\n", (*combinedp).x + (*combinedp).y);
+    // alternatively we could use `->` instead of `.` ONLY if we have a pointer to the struct
+    printf("multiplied: %d\n", combinedp->x * combinedp->y);
+    // printf("%s", npt.pt1); causes segfault
     return 0;
 }
