@@ -18,35 +18,32 @@ int go_goroutine(pthread_t *thread, pthread_attr_t *attr, void *arg) {
 }
 
 
-struct go_goroutine_future {
+/*
+if we do not define like this and instead do
+typedef struct{
     char *returnValue;
     int exitCode;
     pthread_mutex_t mutex;
-};
+}  go_goroutine_future;
+
+we will get an incomplete type error
+*/
+typedef struct go_goroutine_future{
+    char *returnValue;
+    int exitCode;
+    pthread_mutex_t mutex;
+}  go_goroutine_future;
 
 
 struct go_goroutine_future *new_go_goroutine_future() {
-    printf("%d\n", 1);
     char *returnValue;
     int exitCode;
     pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
-    /*go_goroutine_future *fut = go_goroutine_future{
-        *returnValue,
-        mutex
-    };*/
     exitCode = 1;
-    /*struct go_goroutine_future *fut = {
-        returnValue,
-        exitCode,
-        mutex
-    };
-    */
-    rintf("%d\n", 2)
-    struct go_goroutine_future *fut = malloc(sizeof(struct go_goroutine_future));
-    *fut->returnValue = *returnValue;
-    fut->exitCode = exitCode;
-    fut->mutex = mutex;
-    printf("%d\n", 10);
+    struct go_goroutine_future *fut = malloc(sizeof(go_goroutine_future));
+    (*fut).returnValue = *returnValue;
+    (*fut).exitCode = exitCode;
+    (*fut).mutex = mutex;
     return fut;
 }
 
